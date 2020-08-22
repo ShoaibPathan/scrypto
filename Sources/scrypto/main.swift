@@ -51,7 +51,7 @@ struct Decrypt: ParsableCommand {
         abstract: "Decrypt the given tmlp file"
     )
 
-    @Argument(help: "The file to encode")
+    @Argument(help: "The file to decode")
     private var file: String
 
     @Argument(help: "Path to your public key (PEM encoded file)")
