@@ -4,8 +4,8 @@ import ArgumentParser
 struct Scrypto: ParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "scrypto",
-        abstract: "a small tool to play with rsa",
-        version: "0.0.1",
+        abstract: "a small tool to encrypt / decrypt files",
+        version: "0.1",
         subcommands: [
             Encrypt.self,
             Decrypt.self,
@@ -36,12 +36,10 @@ struct Encrypt: ParsableCommand {
         Core.verbose = verbose
 
         var keys = Keypair(publicKeyPath: publicKeyPath, privateKeyPath: privateKeyPath)
-
         try keys.validateFiles()
         try keys.getKeys()
 
-        let handler = EncryptionHandler()
-        try handler.encrypt(filePath: file, with: keys)
+        try EncryptionHandler.encrypt(filePath: file, with: keys)
     }
 }
 
@@ -67,12 +65,10 @@ struct Decrypt: ParsableCommand {
         Core.verbose = verbose
 
         var keys = Keypair(publicKeyPath: publicKeyPath, privateKeyPath: privateKeyPath)
-
         try keys.validateFiles()
         try keys.getKeys()
 
-        let handler = DecryptionHandler()
-        try handler.decrypt(filePath: file, with: keys)
+        try DecryptionHandler.decrypt(filePath: file, with: keys)
     }
 }
 

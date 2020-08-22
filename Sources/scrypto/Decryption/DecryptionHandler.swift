@@ -8,8 +8,8 @@
 import Foundation
 import CryptorRSA
 
-final class DecryptionHandler {
-    public func decrypt(filePath path: String, with keys: Keypair) throws {
+struct DecryptionHandler {
+    public static func decrypt(filePath path: String, with keys: Keypair) throws {
         guard keys.publicKey != nil && keys.privateKey != nil else { throw KeyError.noKeys }
 
         let data = try Files.getDataFromFile(at: path)
@@ -26,11 +26,6 @@ final class DecryptionHandler {
             if Core.verbose {
                 print("wrote decrypted data to \(newFileName)")
             }
-        } catch {
-            #if DEBUG
-            print(error)
-            #endif
-            throw DecryptionError.write
-        }
+        } catch { throw DecryptionError.write }
     }
 }
