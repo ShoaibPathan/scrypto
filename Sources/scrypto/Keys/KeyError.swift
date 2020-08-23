@@ -19,9 +19,9 @@ enum KeyError: LocalizedError {
         case .notFound(let type):
             return "Could not find a key at the given path (\(type) key)"
         case .unreadable(let type):
-            return "Cannot read the content of the given file; do I have enough permissions ? (\(type) key)"
+            return "The file content could not be read (\(type) key)"
         case .invalidKey(let type):
-            return "The \(type) key does not seems to be valid"
+            return "The \(type) key does not seems to be in a valid PEM file"
         case .noKeys:
             return "Keys are not valid"
         }

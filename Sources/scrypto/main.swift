@@ -46,7 +46,7 @@ struct Encrypt: ParsableCommand {
 struct Decrypt: ParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "decrypt",
-        abstract: "Decrypt the given tmlp file"
+        abstract: "Decrypt the given \(Core.fileExtension) file"
     )
 
     @Argument(help: "The file to decode")
@@ -68,6 +68,7 @@ struct Decrypt: ParsableCommand {
         try keys.validateFiles()
         try keys.getKeys()
 
+        try Files.checkFileExtension(at: file)
         try DecryptionHandler.decrypt(filePath: file, with: keys)
     }
 }

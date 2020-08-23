@@ -19,13 +19,14 @@ struct DecryptionHandler {
             throw DecryptionError.invalidData
         }
 
-        let newFileName = path.replacingOccurrences(of: ".\(Core.fileExtension)", with: "")
-        guard let fileUrl = Files.getFileUrl(from: newFileName) else { throw DecryptionError.write }
+        let decryptedFile = Files.getDecryptedFileName(for: path)
+        guard let fileUrl = Files.getFileUrl(from: decryptedFile) else { throw DecryptionError.write }
+
         do {
-            try decryptedData.data.write(to: fileUrl, options: .withoutOverwriting)
-            if Core.verbose {
-                print("wrote decrypted data to \(newFileName)")
-            }
-        } catch { throw DecryptionError.write }
+            try decryptedData.data.write(to: fileUrl)
+            if Core.verbose { print("wrote decrypted data to \(decryptedFile)") }
+        } catch {
+            throw DecryptionError.write
+        }
     }
 }

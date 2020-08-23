@@ -19,13 +19,12 @@ struct EncryptionHandler {
             throw EncryptionError.encryption
         }
 
-        let newFileName = "\(path).\(Core.fileExtension)"
-        guard let fileUrl = Files.getFileUrl(from: newFileName) else { throw EncryptionError.write }
+        let encryptedFile = Files.getEncryptedFileName(for: path)
+        guard let fileUrl = Files.getFileUrl(from: encryptedFile) else { throw EncryptionError.write }
+
         do {
             try encryptedData.data.write(to: fileUrl)
-            if Core.verbose {
-                print("wrote encrypted data to \(newFileName)")
-            }
+            if Core.verbose { print("wrote encrypted data to \(encryptedFile)") }
         } catch { throw EncryptionError.write }
     }
 }
