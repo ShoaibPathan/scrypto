@@ -14,7 +14,7 @@ struct Files {
         case noData
         case wrongExtension
 
-        case urlError
+        case parseError
 
         var errorDescription: String? {
             switch self {
@@ -26,8 +26,8 @@ struct Files {
                 return "The file does not contains any data; or it could not be read"
             case .wrongExtension:
                 return "The file extension is invalid"
-            case .urlError:
-                return "Could not get the file URL"
+            case .parseError:
+                return "Failed to parse the file's path"
             }
         }
     }
@@ -59,8 +59,22 @@ struct Files {
     }
 
     // MARK: - File naming
-    public static func getEncryptedFileName(for path: String) -> String {
-        "\(path).\(Core.fileExtension)"
+    public static func getEncryptedFileName(for path: String, renamed: Bool) -> String {
+        var name = path
+
+        if renamed {
+            let id = UUID().uuidString.lowercased()
+            if !name.contains("/") {
+                name = id
+            } else {
+                if let range = name.range(of: "/", options: .backwards) {
+                    name = "\(name[...range.upperBound])\(id)"
+                } else {
+                    name += id
+                }
+            }
+        }
+        return "\(name).\(Core.fileExtension)"
     }
 
     public static func getDecryptedFileName(for path: String) -> String {

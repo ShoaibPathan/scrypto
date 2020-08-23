@@ -29,7 +29,10 @@ struct Encrypt: ParsableCommand {
     @Argument(help: "Path to your private key (PEM encoded file)")
     private var privateKeyPath: String
 
-    @Flag(help: "Run in verbose mode")
+    @Flag(name: .shortAndLong, help: "Replace the file's name with a uuid")
+    private var rename = false
+
+    @Flag(name: .shortAndLong, help: "Run in verbose mode")
     private var verbose = false
 
     public func run() throws {
@@ -39,7 +42,7 @@ struct Encrypt: ParsableCommand {
         try keys.validateFiles()
         try keys.getKeys()
 
-        try EncryptionHandler.encrypt(filePath: file, with: keys)
+        try EncryptionHandler.encrypt(filePath: file, with: keys, renamed: rename)
     }
 }
 
@@ -58,7 +61,7 @@ struct Decrypt: ParsableCommand {
     @Argument(help: "Path to your private key (PEM encoded file)")
     private var privateKeyPath: String
 
-    @Flag(help: "Run in verbose mode")
+    @Flag(name: .shortAndLong, help: "Run in verbose mode")
     private var verbose = false
 
     public func run() throws {

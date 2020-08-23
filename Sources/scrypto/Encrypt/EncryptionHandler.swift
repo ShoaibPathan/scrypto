@@ -9,7 +9,7 @@ import Foundation
 import CryptorRSA
 
 struct EncryptionHandler {
-    public static func encrypt(filePath path: String, with keys: Keypair) throws {
+    public static func encrypt(filePath path: String, with keys: Keypair, renamed: Bool) throws {
         guard keys.publicKey != nil && keys.privateKey != nil else { throw KeyError.noKeys }
 
         let data = try Files.getDataFromFile(at: path)
@@ -19,7 +19,7 @@ struct EncryptionHandler {
             throw EncryptionError.encryption
         }
 
-        let encryptedFile = Files.getEncryptedFileName(for: path)
+        let encryptedFile = Files.getEncryptedFileName(for: path, renamed: renamed)
         guard let fileUrl = Files.getFileUrl(from: encryptedFile) else { throw EncryptionError.write }
 
         do {
