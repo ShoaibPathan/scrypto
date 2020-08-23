@@ -9,7 +9,7 @@ and [BlueRSA](https://github.com/IBM-Swift/BlueRSA) because I have no clue on ho
 
 ~~Extension check~~ (9953cf8482f6be3f95ba04ae18f2e791608eaeab)
 
-Name randomizer
+~~Name randomizer~~ (c2a802010ed5d11c30d1144dee39988d79ebd27d)
 
 Mass encrypt/decrypt
 
