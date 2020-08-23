@@ -7,14 +7,14 @@ and [BlueRSA](https://github.com/IBM-Swift/BlueRSA) because I have no clue on ho
 
 ## Things to add
 
-[ ] Extension check
+~~Extension check~~ (9953cf8482f6be3f95ba04ae18f2e791608eaeab)
 
-[ ] Name randomizer
+Name randomizer
 
-[ ] Mass encrypt/decrypt
+Mass encrypt/decrypt
 
-[ ] Better error handling
+Better error handling
 
-[ ] Better verbose mode
+Better verbose mode
 
-[ ] Tests I guess...
+Tests I guess...
