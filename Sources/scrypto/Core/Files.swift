@@ -70,6 +70,7 @@ struct Files {
                 if let range = name.range(of: "/", options: .backwards) {
                     name = "\(name[...range.upperBound])\(id)"
                 } else {
+                    print("[ WARNING ] Could not replace name for \(path) -- appending uuid")
                     name += id
                 }
             }
